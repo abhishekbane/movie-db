@@ -1,14 +1,15 @@
 import React from 'react';
-import './App.css';
+
 import Layout from './containers/Layout/Layout';
+import MovieGallery from './containers/MovieGallery/MovieGallery';
+
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Layout>
-        <section>
-          Movies gallery
-        </section>
+        <MovieGallery movies={ [] } onSelect={ () => {} } />
       </Layout>
     </div>
   );
