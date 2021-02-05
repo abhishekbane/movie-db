@@ -7,6 +7,7 @@ export interface IDropdownOption {
 }
 
 interface IDropdown {
+    defaultValue: string;
     options: IDropdownOption[];
     name: string;
     id?: string;
@@ -19,7 +20,10 @@ const Dropdown = ( props: IDropdown ) => {
     ) );
 
     return (
-        <select onChange={ ( event ) => props.onChange(event.target.value) } name={ props.name } id={ props.id }>
+        <select 
+            value={ props.defaultValue } 
+            onChange={ ( event ) => props.onChange(event.target.value) } 
+            name={ props.name } id={ props.id }>
             { options }
         </select>
     );

@@ -11,15 +11,21 @@ import { FilterTypes } from './components/UtilityBar/UtilityBar';
 function App() {
 
   const [ movies, setMoviesBasedOnFilter ] = useFetch();
+  const defaultFilter = FilterTypes.TrendingToday;
 
   useEffect( () => {
-    setMoviesBasedOnFilter(FilterTypes.TrendingToday);
+    setMoviesBasedOnFilter( defaultFilter );
   }, [] );
 
   return (
     <div className="App">
-      <Layout onFilterChange = { setMoviesBasedOnFilter }>
-        <MovieGallery movies={ movies } onSelect={ () => {} } />
+      <Layout>
+        <MovieGallery 
+          defaultFilter={ defaultFilter }
+          onFilterChange={ setMoviesBasedOnFilter } 
+          movies={ movies } 
+          onSelect={ () => {} } 
+        />
       </Layout>
     </div>
   );

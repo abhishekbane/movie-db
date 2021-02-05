@@ -11,6 +11,7 @@ export enum FilterTypes {
 }
 
 interface IUtilityBar {
+    defaultFilter: FilterTypes;
     onFilterChange( filterType: FilterTypes ): Promise<void> 
 }
 
@@ -33,7 +34,11 @@ const UtilityBar = ( props: IUtilityBar ) => {
 
     return (
         <div className={ styles.utilityBar }>
-            <Dropdown onChange={ props.onFilterChange } options={ options } name="filterMovies" />
+            <Dropdown 
+                defaultValue={ props.defaultFilter } 
+                onChange={ props.onFilterChange } 
+                options={ options } 
+                name="filterMovies" />
         </div>
     );
 };
