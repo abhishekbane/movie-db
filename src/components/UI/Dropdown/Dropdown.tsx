@@ -14,7 +14,9 @@ interface IDropdown {
 }
 
 const Dropdown = ( props: IDropdown ) => {
-    const options = props.options.map( ( option ) => ( <option value={ option.value } > { option.name } </option> ) );
+    const options = props.options.map( ( option, index ) => ( 
+        <option key={ index } value={ option.value } > { option.name } </option> 
+    ) );
 
     return (
         <select onChange={ ( event ) => props.onChange(event.target.value) } name={ props.name } id={ props.id }>

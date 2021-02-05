@@ -4,25 +4,36 @@ import Dropdown, { IDropdownOption } from '../UI/Dropdown/Dropdown';
 
 import styles from './UtilityBar.module.css';
 
+export enum FilterTypes {
+    TrendingToday = "TrendingToday",
+    TrendingThisWeek = "TrendingThisWeek",
+    Popular = "Popular"
+}
+
+interface IUtilityBar {
+    onFilterChange( filterType: FilterTypes ): Promise<void> 
+}
+
 const options: IDropdownOption[] = [
     {   
         name: "Trending today",
-        value: "trendingToday"
+        value: FilterTypes.TrendingToday
     },
     {
         name: "Trending this week",
-        value: "trendingThisWeek"
+        value: FilterTypes.TrendingThisWeek
     },
     {
         name: "Popular",
-        value: "popular"
+        value: FilterTypes.Popular
     }
 ];
 
-const UtilityBar = () => {
+const UtilityBar = ( props: IUtilityBar ) => {
+
     return (
         <div className={ styles.utilityBar }>
-            <Dropdown onChange={ (val) => alert(val) } options={ options } name="filterMovies" />
+            <Dropdown onChange={ props.onFilterChange } options={ options } name="filterMovies" />
         </div>
     );
 };
