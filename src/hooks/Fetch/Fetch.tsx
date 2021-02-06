@@ -112,7 +112,7 @@ export const useFindMovieById = (): [ IMovieDetailsData, (id: number) => Promise
                     posterSource: IMAGE_PRENT_URL+result.poster_path,
                     isAdult: result.adult,
                     overview: result.overview,
-                    voteAverage: result.vote_average,
+                    rating: result.vote_average,
                     status: result.status
                 }
             setMovie(movie);

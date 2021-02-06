@@ -11,7 +11,7 @@ export interface IMovieDetailsData {
     posterSource: string;
     title: string;
     overview: string;
-    voteAverage: string;
+    rating: string;
     isAdult: boolean;
     status: string;
 }
@@ -26,7 +26,7 @@ const MovieDetails = ( props: IMovieDetails ) => {
             <img src={ props.movie.posterSource } />
             <h3>{ props.movie.title }</h3>
             <p>{ props.movie.status }</p>
-            <p>{ props.movie.voteAverage }</p>
+            <p>{ props.movie.rating }</p>
             <p>{ props.movie.overview }</p>
         </section>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Header from '../../components/Header/Header';
 import MovieGallery from '../../components/MovieGallery/MovieGallery';
@@ -12,7 +12,7 @@ interface ILayout {
 const Layout = ( props: ILayout ) => {
 
     const [ movies, setMoviesBahsedOnSearch ] = useSearch();
-
+    
     return (
         <div>
             <Header title="Movie DB" onSearchClick={ setMoviesBahsedOnSearch } enableSearch/>

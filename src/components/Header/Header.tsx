@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import styles from './Header.module.css';
 
 interface IHeader {
@@ -15,13 +17,15 @@ const Header: React.FunctionComponent<IHeader> = ( props: IHeader ) => {
     ? (
         <div>
             <input type="text" value={ searchTerm } onChange={ (ev) => setSearchTerm(ev.target.value) } />
-            <button onClick={ () => props.onSearchClick( searchTerm ) } >Go</button>
+            <button onClick={ () => (searchTerm ? props.onSearchClick( searchTerm ) : null) } >Go</button>
         </div>
     ) 
     : null;
     return (
         <header className={ styles.header }>
-            <h1> { props.title } </h1>
+            <Link to="/">
+                <h1> { props.title } </h1>
+            </Link>
             { searchBar }
         </header>
     );

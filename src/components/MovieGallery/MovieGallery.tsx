@@ -13,9 +13,8 @@ interface IMovieGallery {
 const MovieGallery = ( props: IMovieGallery ) => {
 
     const movieArticles = props.movies.map( ( movie, index ) => (
-        <Link to={ "/movie/"+movie.movieId }>
+        <Link key={ index } to={ "/movie/"+movie.movieId }>
             <MovieArticle
-                key={ index }
                 movieId={ movie.movieId }
                 title={ movie.title }
                 posterSource={ movie.posterSource }

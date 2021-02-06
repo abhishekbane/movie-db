@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './Dropdown.module.css';
 
@@ -17,15 +17,23 @@ interface IDropdown {
 }
 
 const Dropdown = ( props: IDropdown ) => {
+
+    const [ selectedValue, setSelectedValue ] = useState( props.defaultValue );
+
     const options = props.options.map( ( option, index ) => ( 
         <option className={ styles.option } key={ index } value={ option.value } > { option.name } </option> 
     ) );
 
+    const onChangeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedValue(event.target.value);
+        props.onChange(event.target.value);
+    }
+
     return (
         <select 
             className={ styles.dropdown }
-            value={ props.defaultValue } 
-            onChange={ ( event ) => props.onChange(event.target.value) } 
+            value={ selectedValue } 
+            onChange={ onChangeHandler } 
             name={ props.name } id={ props.id }>
             { options }
         </select>

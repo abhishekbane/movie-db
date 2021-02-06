@@ -14,10 +14,13 @@ export interface IMovieArticle extends IMovieArticleData {
 }
 
 const MovieArticle = ( props: IMovieArticle ) => {
+
+    const title = props.title.length > 20 ? props.title.slice(0, 18)+"..." : props.title;
+
     return (
         <article className={ styles.movieArticle } onClick={ () => props.onClick(props.movieId) }>
             <img className={ styles.poster } src={ props.posterSource }/>
-            <h3 className={ styles.title }>{ props.title }</h3>rating
+            <h3 className={ styles.title }>{ title }</h3>rating
         </article>
     );
 };

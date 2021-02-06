@@ -19,7 +19,7 @@ function App() {
   const defaultFilter = FilterTypes.TrendingToday;
 
   useEffect( () => {
-    //setMoviesBasedOnFilter( defaultFilter );
+    setMoviesBasedOnFilter( defaultFilter );
   }, [] );
 
   return (
