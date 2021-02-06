@@ -1,11 +1,12 @@
 import React from 'react';
 
-import MovieArticle, { IMovieArticle } from '../MovieArticle/MovieArticle';
+import MovieArticle, { IMovieArticleData } from '../MovieArticle/MovieArticle';
 
 import styles from './MovieGallery.module.css';
 
 interface IMovieGallery {
-    movies: IMovieArticle[];
+    movies: IMovieArticleData[];
+    onMovieSelected( movieId: number ): void;
 }
 
 const MovieGallery = ( props: IMovieGallery ) => {
@@ -17,9 +18,10 @@ const MovieGallery = ( props: IMovieGallery ) => {
             title={ movie.title }
             posterSource={ movie.posterSource }
             isAdult={ movie.isAdult }
+            onClick = { props.onMovieSelected }
         /> 
     ));
-    
+
     return (
         <div className={ styles.movieGallery }>
             { movieArticles }

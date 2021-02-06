@@ -5,6 +5,7 @@ import MovieGallery from '../../components/MovieGallery/MovieGallery';
 import { useSearch } from '../../hooks/Fetch/Fetch';
 
 interface ILayout {
+    onMovieSelected( movieId: number ): void;
     children: React.ReactNode;
 }
 
@@ -15,7 +16,7 @@ const Layout = ( props: ILayout ) => {
     return (
         <div>
             <Header title="Movie DB" onSearchClick={ setMoviesBahsedOnSearch } enableSearch/>
-            <MovieGallery movies={ movies } />
+            <MovieGallery onMovieSelected={ props.onMovieSelected } movies={ movies } />
             { props.children }
         </div>
     );

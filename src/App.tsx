@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
 import Layout from './containers/Layout/Layout';
-import MovieExplorer from './containers/MovieGallery/MovieExplorer';
+import MovieExplorer from './containers/MovieExplorer/MovieExplorer';
+import MovieDetails from './containers/MovieDetails/MovieDetails';
 
-import { useFilter } from './hooks/Fetch/Fetch';
+import { useFilter, useFindMovieById } from './hooks/Fetch/Fetch';
 
 import './App.css';
 import { FilterTypes } from './components/UtilityBar/UtilityBar';
@@ -11,6 +12,8 @@ import { FilterTypes } from './components/UtilityBar/UtilityBar';
 function App() {
 
   const [ movies, setMoviesBasedOnFilter ] = useFilter();
+  const [ movie, setMovieWithId ] = useFindMovieById();
+
   const defaultFilter = FilterTypes.TrendingToday;
 
   useEffect( () => {
@@ -19,13 +22,15 @@ function App() {
 
   return (
     <div className="App">
-      <Layout>
+      <Layout onMovieSelected={ setMovieWithId }>
         <MovieExplorer 
+          onMovieSelected = { setMovieWithId }
           defaultFilter={ defaultFilter }
           onFilterChange={ setMoviesBasedOnFilter } 
           movies={ movies } 
           onSelect={ () => {} } 
         />
+        <MovieDetails movie={ movie } />
       </Layout>
     </div>
   );
