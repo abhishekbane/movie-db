@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import MovieArticle, { IMovieArticleData } from '../MovieArticle/MovieArticle';
 
@@ -12,14 +13,16 @@ interface IMovieGallery {
 const MovieGallery = ( props: IMovieGallery ) => {
 
     const movieArticles = props.movies.map( ( movie, index ) => (
-        <MovieArticle
-            key={ index }
-            movieId={ movie.movieId }
-            title={ movie.title }
-            posterSource={ movie.posterSource }
-            isAdult={ movie.isAdult }
-            onClick = { props.onMovieSelected }
-        /> 
+        <Link to={ "/movie/"+movie.movieId }>
+            <MovieArticle
+                key={ index }
+                movieId={ movie.movieId }
+                title={ movie.title }
+                posterSource={ movie.posterSource }
+                isAdult={ movie.isAdult }
+                onClick = { props.onMovieSelected }
+            /> 
+        </Link>
     ));
 
     return (

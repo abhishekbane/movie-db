@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { match } from 'react-router-dom';
+
+import { useFindMovieById } from '../../hooks/Fetch/Fetch';
 
 export interface IActorArticle {
 
@@ -13,7 +16,7 @@ export interface IMovieDetailsData {
     status: string;
 }
 
-export interface IMovieDetails {
+export interface IMovieDetails{
     movie: IMovieDetailsData;
 }
 
