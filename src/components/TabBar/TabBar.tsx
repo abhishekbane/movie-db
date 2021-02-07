@@ -5,6 +5,7 @@ import SearchInput from '../SearchInput/SearchInput';
 import { FilterTypes } from '../../hoc/TabbedWindow/TabbedWindow';
 
 import styles from './TabBar.module.css';
+import Dropdown from '../UI/Dropdown/Dropdown';
 
 export interface ITabBarOption {
     id?: number | string;
@@ -49,12 +50,22 @@ const TabBar = ( props: ITabBar ) => {
 
     const searchInput = props.allowSearch ? <SearchInput onSearch={ onSearchHandler } /> : null
     const searchSelectedClass = selectedTab==="" ? styles.tabSelected : "";
-    const searchContainerClasses = `${styles.searchInputContainer} ${searchSelectedClass}`
+    const searchContainerClasses = `${styles.inputContainer} ${searchSelectedClass}`;
+
+    let dropdownTabClasses = `${styles.inputContainer} ${styles.dropdownTab}`;
+    dropdownTabClasses += selectedTab !== "" ? " "+styles.tabSelected : "";
 
     return (
         <nav className={ styles.tabBar }>
-            <div>
+            <div className={ styles.tabsDisplay }>
                 { tabBar }
+            </div>
+            <div className={ dropdownTabClasses }>
+                <Dropdown 
+                    defaultValue={ props.defaultFilter } 
+                    options={ props.options } 
+                    name="filterDropdown" 
+                    onChange={ onTabSelectedHandler } />
             </div>
             <div className={ searchContainerClasses }>
                 { searchInput }

@@ -1,9 +1,19 @@
 .poster {
-    height: 14rem;
+    height: 12rem;
     width: auto;
-    min-width: 9.31rem;
-    max-width: 9.31rem;
-    max-height: 14rem;
+    min-width: 7.9rem;
+    max-width: 7.9rem;
+    max-height: 12rem;
     border-radius: 2px 2px 0 0;
     display: block;
+}
+
+@media (min-width: 28rem) {
+    .poster {
+        height: 14rem;
+        width: auto;
+        min-width: 9.31rem;
+        max-width: 9.31rem;
+        max-height: 14rem;
+    }
 }

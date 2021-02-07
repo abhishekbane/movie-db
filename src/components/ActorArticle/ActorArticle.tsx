@@ -20,13 +20,13 @@ interface IActorArticle extends IActorArticleData {
 
 const ActorArticle = ( props: IActorArticleData ) => {
 
-    const name = props.name.length > 20 ? props.name.slice(0, 18)+"..." : props.name;
+    const name = props.name.length > 19 ? props.name.slice(0, 16)+"..." : props.name;
 
     let character="";
     if(props.character){
         const splitCharacter = props.character.split('(', 2);
         character = splitCharacter.length===2 ? `(${splitCharacter[1].trim()} ${splitCharacter[0].trim()}` : props.character;
-        character = character.length > 20 ? character.slice(0, 18)+"..." : character;
+        character = character.length > 19 ? character.slice(0, 16)+"..." : character;
     }
 
     return (
