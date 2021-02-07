@@ -14,3 +14,8 @@
     color: var(--semidark-colour);
     background-color: var(--primary-colour);
 }
+
+.pagingButton:disabled {
+    color: var(--semidark-colour);
+    background-color: var(--dark-colour);
+}
