@@ -16,7 +16,7 @@ export enum FilterTypes {
 
 interface ITabbedWindow {
     defaultFilter: FilterTypes;
-    onTabSelect( filterType: FilterTypes ): Promise<void> 
+    onTabSelect( filterType: FilterTypes ): void;
     onSearch( searchTerm: string ): void
     children: React.ReactNode;
 }
@@ -39,7 +39,7 @@ const options: ITabBarOption[] = [
 const TabbedWindow = ( props: ITabbedWindow ) => {
     return (
         <div className={ styles.tabbedWindow }>
-            <TabBar onTabSelect={ props.onTabSelect } allowSearch onSearch={ props.onSearch } options={ options } />
+            <TabBar defaultFilter={ props.defaultFilter } onTabSelect={ props.onTabSelect } allowSearch onSearch={ props.onSearch } options={ options } />
             { props.children }
             
         </div>

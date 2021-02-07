@@ -1,0 +1,9 @@
+.poster {
+    height: 14rem;
+    width: auto;
+    min-width: 9.31rem;
+    max-width: 9.31rem;
+    max-height: 14rem;
+    border-radius: 2px 2px 0 0;
+    display: block;
+}

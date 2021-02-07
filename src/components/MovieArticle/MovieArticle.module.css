@@ -1,38 +1,11 @@
-.movieArticle {
-    border: 1px solid #737373;
-    border-radius: 2px;
-    margin: 1rem;
-
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: var(--primary-colour);
-    border: 2px solid var(--primary-colour);
-    border-radius: 2px;
-}
-
-.movieArticle:hover {
-    box-shadow: 0 0 0 0.5rem var(--primary-colour-translucent);
-}
-
 .details {
     background-color: var(--dark-colour);
     flex-grow: 1;
     padding: 0.2rem;
+    color: var(--primary-colour);
+    height: 4.5rem;
 }
 
 .title {
     font-size: 0.8rem;
-}
-
-.poster {
-    height: 14rem;
-    width: auto;
-    border-radius: 2px 2px 0 0;
-    display: block;
-}
-
-.link {
-    text-decoration: none;
-    color: var(--primary-colour);
 }

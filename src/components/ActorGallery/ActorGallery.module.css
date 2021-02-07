@@ -1,0 +1,6 @@
+.actorGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}

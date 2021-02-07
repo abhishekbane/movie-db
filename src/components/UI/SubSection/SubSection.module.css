@@ -1,0 +1,8 @@
+.title {
+    color: var(--primary-colour);
+    margin: 0 0 0.5rem 0;
+}
+
+.subSection {
+    margin: 0 0 1.5rem 0;
+}

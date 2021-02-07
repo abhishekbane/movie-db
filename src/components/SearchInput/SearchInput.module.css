@@ -1,0 +1,29 @@
+.searchInput {
+    height: 2rem;
+}
+
+.searchBox{
+    width: 35vw;
+    max-width: 15rem;
+    height: 100%;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.goButton {
+    height: 100%;
+    background-color: var(--dark-colour);
+    color: var(--primary-colour);
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.goButton:hover, .goButton:active {
+    color: var(--dark-colour);
+    background-color: var(--primary-colour);
+}

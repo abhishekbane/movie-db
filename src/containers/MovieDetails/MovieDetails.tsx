@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { match } from 'react-router-dom';
 
 import ActorGallery from '../../components/ActorGallery/ActorGallery';
+import DetailsCard from '../../components/DetailsCard/DetailsCard';
 
 import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
+
+import styles from './MovieDetails.module.css';
+import SubSection from '../../components/UI/SubSection/SubSection';
 
 export interface IMovieDetailsData {
     posterSource: string;
@@ -20,15 +23,23 @@ export interface IMovieDetails{
 }
 
 const MovieDetails = ( props: IMovieDetails ) => {
-    console.log( props.movie );
+
     return (
-        <section>
-            <img src={ props.movie.posterSource } />
-            <h3>{ props.movie.title }</h3>
-            <p>{ props.movie.status }</p>
-            <p>{ props.movie.rating }</p>
-            <p>{ props.movie.overview }</p>
-            <ActorGallery actors={ props.movie.actors } />
+        <section className={ styles.section }>
+            <DetailsCard 
+                title={props.movie.title} 
+                posterSource={ props.movie.posterSource } >
+                    <p className={ styles.paragraph }>{ props.movie.status }</p>
+                    <p  className={ styles.paragraph }>{ props.movie.rating }</p>
+            </DetailsCard>
+
+            <SubSection title="Synopsis">
+                <p className={ styles.paragraph }>{ props.movie.overview }</p>
+            </SubSection>
+                
+            <SubSection title="Actors">
+                <ActorGallery actors={ props.movie.actors } />
+            </SubSection>
         </section>
     )
 };

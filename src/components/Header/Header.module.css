@@ -4,7 +4,7 @@
     align-items: center;
     padding: 0 1rem;
     box-sizing: border-box;
-    background-color: var(--dark-colour);
+    background-color: var(--semidark-colour);
     color: var(--primary-colour);
 }
 

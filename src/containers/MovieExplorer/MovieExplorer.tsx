@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MovieGallery from '../../components/MovieGallery/MovieGallery';
 import { IMovieArticleData } from '../../components/MovieArticle/MovieArticle';
@@ -14,18 +14,29 @@ interface IMovieExplorer {
 const MovieExplorer= ( props: IMovieExplorer ) => {
 
     const { movies, prevPageFilter, nextPageFilter, setMoviesBasedOnFilter, setMoviesBasedOnSearch, setNextMoviesBasedOnFilter, setPrevMoviesBasedOnFilter } = useFilter();
-
+    
+    const [ isSearchSelected, setIsSearchSelected ] = useState( false );
     const defaultFilter = FilterTypes.TrendingToday;
 
     useEffect( () => {
         setMoviesBasedOnFilter( defaultFilter );
     }, [] );
 
+    const onSearchHandler = ( searchTerm: string ) => {
+        setMoviesBasedOnSearch(searchTerm);
+        setIsSearchSelected(true);
+    };
+
+    const onTabSelectedHandler = ( filterType: FilterTypes ) => {
+        setMoviesBasedOnFilter( filterType );
+        setIsSearchSelected(false);
+    }
+
     return (
         <TabbedWindow 
             defaultFilter={ defaultFilter } 
-            onSearch={ setMoviesBasedOnSearch } 
-            onTabSelect={ setMoviesBasedOnFilter }>
+            onSearch={ onSearchHandler } 
+            onTabSelect={ onTabSelectedHandler }>
                 <div className={ styles.movieGalleryContainer }>
                     <div className={ styles.movieGallery }>
                         <MovieGallery movies={ movies } />
@@ -33,11 +44,11 @@ const MovieExplorer= ( props: IMovieExplorer ) => {
                     <div className={ styles.pagingBar }>
                         <button 
                             className={ styles.pagingButton } 
-                            disabled={ !prevPageFilter } 
+                            disabled={ !prevPageFilter || isSearchSelected } 
                             onClick={ () => setPrevMoviesBasedOnFilter() }>{`<`}</button>
                         <button 
                             className={ styles.pagingButton } 
-                            disabled={ !nextPageFilter } 
+                            disabled={ !nextPageFilter || isSearchSelected } 
                             onClick={ () => setNextMoviesBasedOnFilter() }>{`>`}</button>
                     </div>
                 </div>

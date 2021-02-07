@@ -1,0 +1,15 @@
+.details {
+    background-color: var(--dark-colour);
+    flex-grow: 1;
+    padding: 0.2rem;
+    color: var(--primary-colour);
+    min-height: 4.5rem;
+}
+
+.alias {
+    color: var(--light-colour);   
+}
+
+.title, .alias {
+    font-size: 0.8rem;
+}

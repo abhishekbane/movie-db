@@ -12,8 +12,8 @@ interface IMovieGallery {
 const MovieGallery = ( props: IMovieGallery ) => {
 
     const movieArticles = props.movies.map( ( movie, index ) => (
-    
         <MovieArticle
+            key={index}
             movie={ movie }
         />
     ));

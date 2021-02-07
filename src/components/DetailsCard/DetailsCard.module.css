@@ -1,0 +1,16 @@
+.basicDetailsCard {
+    display: flex;
+    margin: 0 0 1.5rem 0;
+}
+
+.basicDetails {
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title {
+    color: var(--primary-colour);
+    margin: 0 0 0.5rem 0;
+}

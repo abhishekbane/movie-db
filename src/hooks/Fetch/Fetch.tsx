@@ -31,7 +31,8 @@ export const useFilter = () => {
         
         pageFilter = page ? page : 1;
         selectedFilter = filterType;
-        console.log(selectedFilter);
+        setPrevPageFilter(pageFilter-1);
+        setNextPageFilter(pageFilter+1);
 
         switch(filterType) {
             case FilterTypes.TrendingToday:
@@ -68,6 +69,7 @@ export const useFilter = () => {
 
     const setNextMoviesBasedOnFilter = () => {
         debugger;
+        setPrevPageFilter(pageFilter);
         if( pageFilter < 1000 ) {
             setNextPageFilter(++pageFilter);
         }
@@ -78,11 +80,12 @@ export const useFilter = () => {
     };
 
     const setPrevMoviesBasedOnFilter = () => {
+        setNextPageFilter(pageFilter);
         if( pageFilter > 1 ){
             setPrevPageFilter(--pageFilter);
         }
         else {
-            setPrevPageFilter(-1);
+            setPrevPageFilter(0);
         }
 
         setMoviesBasedOnFilter( selectedFilter as FilterTypes, pageFilter );
