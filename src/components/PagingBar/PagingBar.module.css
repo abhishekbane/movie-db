@@ -1,0 +1,16 @@
+.pagingButton {
+    height: 2rem;
+    width: 6rem;
+    margin: 1rem;
+    border: none;
+    background-color: var(--semidark-colour);
+    color: var(--primary-colour);
+    cursor: pointer;
+    font-weight: 600;
+    outline: none;
+}
+
+.pagingButton:hover {
+    color: var(--semidark-colour);
+    background-color: var(--primary-colour);
+}

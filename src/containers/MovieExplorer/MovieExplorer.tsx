@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import MovieGallery from '../../components/MovieGallery/MovieGallery';
-import { IMovieArticleData } from '../../components/MovieArticle/MovieArticle';
+import PagingBar from '../../components/PagingBar/PagingBar';
 import TabbedWindow, { FilterTypes } from '../../hoc/TabbedWindow/TabbedWindow';
 
 import { useFilter } from '../../hooks/Fetch/Fetch';
@@ -41,16 +41,14 @@ const MovieExplorer= ( props: IMovieExplorer ) => {
                     <div className={ styles.movieGallery }>
                         <MovieGallery movies={ movies } />
                     </div>
-                    <div className={ styles.pagingBar }>
-                        <button 
-                            className={ styles.pagingButton } 
-                            disabled={ !prevPageFilter || isSearchSelected } 
-                            onClick={ () => setPrevMoviesBasedOnFilter() }>{`<`}</button>
-                        <button 
-                            className={ styles.pagingButton } 
-                            disabled={ !nextPageFilter || isSearchSelected } 
-                            onClick={ () => setNextMoviesBasedOnFilter() }>{`>`}</button>
-                    </div>
+                    <PagingBar 
+                        disableNextButton={ !nextPageFilter || isSearchSelected }
+                        disablePrevButton={ !prevPageFilter || isSearchSelected }
+                        prevButtonText="<"
+                        nextButtonText=">"
+                        onPrevClick={ () => setPrevMoviesBasedOnFilter() }
+                        onNextClick={ () => setNextMoviesBasedOnFilter() }
+                    />
                 </div>
         </TabbedWindow>
     );
