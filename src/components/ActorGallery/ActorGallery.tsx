@@ -8,17 +8,13 @@ interface IActorGallery {
 }
 
 const ActorGallery = (props: IActorGallery ) => {
-
     const actorGallery = props.actors.map( actor => (
-        <Link key={actor.id} to={"/actor/"+actor.id}>
-            <ActorArticle 
-                posterPath={ actor.posterPath }
-                name={ actor.name }
-                character={ actor.character }
-                id={ actor.id }
-            /> 
-        </Link>
-        
+        <ActorArticle 
+            posterPath={ actor.posterPath }
+            name={ actor.name }
+            character={ actor.character }
+            id={ actor.id }
+        />
     ));
 
     return (

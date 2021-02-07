@@ -5,8 +5,7 @@ import { IMovieDetailsData } from '../../containers/MovieDetails/MovieDetails';
 import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
 import { IActorDetailsData } from '../../containers/ActorDetails/ActorDetails';
 
-import { FilterTypes } from '../../components/UtilityBar/UtilityBar';
-import { SSL_OP_CISCO_ANYCONNECT } from 'constants';
+import { FilterTypes } from '../../hoc/TabbedWindow/TabbedWindow';
 
 export enum TrendingDuration {
     Today = "day",
@@ -18,12 +17,21 @@ export const IMAGE_PARENT_URL = "https://image.tmdb.org/t/p/w185";
 const API_ORIGIN = "https://api.themoviedb.org/3";
 const API_KEY = "api_key=60c713cb032d351520ee1b18537262f5";
 
-export const useFilter = (): [ IMovieArticleData[], (filterType: FilterTypes) => Promise<void> ] => {
+let pageFilter=1;
+let selectedFilter="";
+
+export const useFilter = () => {
 
     const [ movies, setMovies ] = useState([] as IMovieArticleData[]);
+    const [ prevPageFilter, setPrevPageFilter ] = useState(0);
+    const [ nextPageFilter, setNextPageFilter ] = useState(2);
 
-    const setMoviesBasedOnFilter = async( filterType: FilterTypes ) => {
+    const setMoviesBasedOnFilter = async( filterType: FilterTypes, page?: number ) => {
         let apiUrl = API_ORIGIN;
+        
+        pageFilter = page ? page : 1;
+        selectedFilter = filterType;
+        console.log(selectedFilter);
 
         switch(filterType) {
             case FilterTypes.TrendingToday:
@@ -40,14 +48,15 @@ export const useFilter = (): [ IMovieArticleData[], (filterType: FilterTypes) =>
         }
 
         try {
-            const response = await fetch( `${apiUrl}?${API_KEY}`);
+            const response = await fetch( `${apiUrl}?${API_KEY}&page=${pageFilter}`);
             const result: any = await response.json();
             const movies: IMovieArticleData[] = result.results.map( (movie: any): IMovieArticleData => (
                 {
                     title: movie.title,
                     id: movie.id,
                     posterSource: IMAGE_PARENT_URL+movie.poster_path,
-                    isAdult: movie.adult
+                    isAdult: movie.adult,
+                    rating: movie.vote_average
                 }
             ) );
             setMovies(movies);
@@ -57,10 +66,62 @@ export const useFilter = (): [ IMovieArticleData[], (filterType: FilterTypes) =>
         }
     };
 
-    return [
+    const setNextMoviesBasedOnFilter = () => {
+        debugger;
+        if( pageFilter < 1000 ) {
+            setNextPageFilter(++pageFilter);
+        }
+        else {
+            setNextPageFilter(0);
+        }
+        setMoviesBasedOnFilter( selectedFilter as FilterTypes, pageFilter );
+    };
+
+    const setPrevMoviesBasedOnFilter = () => {
+        if( pageFilter > 1 ){
+            setPrevPageFilter(--pageFilter);
+        }
+        else {
+            setPrevPageFilter(-1);
+        }
+
+        setMoviesBasedOnFilter( selectedFilter as FilterTypes, pageFilter );
+    };
+
+    const setMoviesBasedOnSearch = async( searchTerm: string ) => {
+        const validSearchTerm = searchTerm.split(" ").reduce( ( acc, current ) => (acc+"+"+current) );
+        console.log(validSearchTerm);
+        const apiUrl = API_ORIGIN + `/search/movie?${API_KEY}&query=${validSearchTerm}`;
+
+        try {
+            const response = await fetch( apiUrl );
+            const result: any = await response.json();
+            const movies: IMovieArticleData[] = result.results.map( (movie: any): IMovieArticleData => (
+                {
+                    title: movie.title,
+                    id: movie.id,
+                    posterSource: IMAGE_PARENT_URL+movie.poster_path,
+                    isAdult: movie.adult,
+                    rating: movie.vote_average
+                }
+            ) );
+            setMovies(movies);
+        }
+        catch {
+            alert( "Couldn't fetch your movies" );
+        }
+
+    };
+
+    return {
         movies,
-        setMoviesBasedOnFilter
-    ];
+        prevPageFilter,
+        nextPageFilter,
+        setMoviesBasedOnFilter,
+        setNextMoviesBasedOnFilter,
+        setPrevMoviesBasedOnFilter,
+        setMoviesBasedOnSearch
+    };
 
 };
 
@@ -80,13 +141,14 @@ export const useSearch = (): [ IMovieArticleData[], (searchTerm: string) => Prom
                     title: movie.title,
                     id: movie.id,
                     posterSource: IMAGE_PARENT_URL+movie.poster_path,
-                    isAdult: movie.adult
+                    isAdult: movie.adult,
+                    rating: movie.vote_average
                 }
             ) );
             setMovies(movies);
         }
         catch {
-            
+            alert( "Couldn't fetch your movies" );
         }
 
     };
@@ -116,7 +178,8 @@ export const useFindActorById = (defaultValue: IActorDetailsData): [ IActorDetai
                         id: movie.id,
                         title: movie.title,
                         posterSource: IMAGE_PARENT_URL+movie.poster_path,
-                        isAdult: movie.adult
+                        isAdult: movie.adult,
+                        rating: movie.vote_average
                     }
                 ) )
             };

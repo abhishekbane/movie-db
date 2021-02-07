@@ -4,16 +4,35 @@
     margin: 1rem;
 
     display: inline-flex;
-    /*flex-grow: 1;*/
     flex-direction: column;
     align-items: flex-start;
+    background-color: var(--primary-colour);
+    border: 2px solid var(--primary-colour);
+    border-radius: 2px;
+}
+
+.movieArticle:hover {
+    box-shadow: 0 0 0 0.5rem var(--primary-colour-translucent);
+}
+
+.details {
+    background-color: var(--dark-colour);
+    flex-grow: 1;
+    padding: 0.2rem;
 }
 
 .title {
-    font-size: 1rem;
-    margin: 0.5rem;
+    font-size: 0.8rem;
 }
 
 .poster {
-    /*width: 100%;*/
+    height: 14rem;
+    width: auto;
+    border-radius: 2px 2px 0 0;
+    display: block;
+}
+
+.link {
+    text-decoration: none;
+    color: var(--primary-colour);
 }

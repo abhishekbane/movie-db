@@ -4,6 +4,8 @@ import Header from '../../components/Header/Header';
 import MovieGallery from '../../components/MovieGallery/MovieGallery';
 import { useSearch } from '../../hooks/Fetch/Fetch';
 
+import styles from './Layout.module.css';
+
 interface ILayout {
     onMovieSelected?( movieId: number ): void;
     children: React.ReactNode;
@@ -11,13 +13,12 @@ interface ILayout {
 
 const Layout = ( props: ILayout ) => {
 
-    const [ movies, setMoviesBahsedOnSearch ] = useSearch();
-
     return (
-        <div>
-            <Header title="Movie DB" onSearchClick={ setMoviesBahsedOnSearch } enableSearch/>
-            <MovieGallery onMovieSelected={ props.onMovieSelected } movies={ movies } />
-            { props.children }
+        <div className={ styles.layout }>
+            <Header title="Movie DB" />
+            <div className={ styles.content }>
+                { props.children }
+            </div>
         </div>
     );
 };
