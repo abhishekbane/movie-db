@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { match } from 'react-router-dom';
 
-import { useFindMovieById } from '../../hooks/Fetch/Fetch';
+import ActorGallery from '../../components/ActorGallery/ActorGallery';
 
-export interface IActorArticle {
-
-}
+import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
 
 export interface IMovieDetailsData {
     posterSource: string;
@@ -14,6 +12,7 @@ export interface IMovieDetailsData {
     rating: string;
     isAdult: boolean;
     status: string;
+    actors: IActorArticleData[];
 }
 
 export interface IMovieDetails{
@@ -21,6 +20,7 @@ export interface IMovieDetails{
 }
 
 const MovieDetails = ( props: IMovieDetails ) => {
+    console.log( props.movie );
     return (
         <section>
             <img src={ props.movie.posterSource } />
@@ -28,6 +28,7 @@ const MovieDetails = ( props: IMovieDetails ) => {
             <p>{ props.movie.status }</p>
             <p>{ props.movie.rating }</p>
             <p>{ props.movie.overview }</p>
+            <ActorGallery actors={ props.movie.actors } />
         </section>
     )
 };

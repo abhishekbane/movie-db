@@ -9,18 +9,15 @@ import styles from './MovieExplorer.module.css';
 interface IMovieExplorer {
     movies: IMovieArticleData[];
     defaultFilter: FilterTypes;
-    onSelect( movie: IMovieArticleData ): void;
     onFilterChange( filterType: FilterTypes ):Promise<void>;
-    onMovieSelected( movieId: number ): void;
-
-    
+    onMovieSelected?( movieId: number ): void;
 }
 
 const MovieExplorer= ( props: IMovieExplorer ) => {
     return (
         <section>
             <UtilityBar defaultFilter={ props.defaultFilter } onFilterChange={ props.onFilterChange } />
-            <MovieGallery onMovieSelected={ props.onMovieSelected } movies={ props.movies } />
+            <MovieGallery movies={ props.movies } />
         </section>
     );
 };

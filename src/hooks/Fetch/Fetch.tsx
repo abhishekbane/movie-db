@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 
 import { IMovieArticleData } from '../../components/MovieArticle/MovieArticle';
 import { IMovieDetailsData } from '../../containers/MovieDetails/MovieDetails';
+import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
+import { IActorDetailsData } from '../../containers/ActorDetails/ActorDetails';
 
 import { FilterTypes } from '../../components/UtilityBar/UtilityBar';
+import { SSL_OP_CISCO_ANYCONNECT } from 'constants';
 
 export enum TrendingDuration {
     Today = "day",
     Week = "week"
 }
 
-export const IMAGE_PRENT_URL = "https://image.tmdb.org/t/p/w185";
+export const IMAGE_PARENT_URL = "https://image.tmdb.org/t/p/w185";
 
 const API_ORIGIN = "https://api.themoviedb.org/3";
 const API_KEY = "api_key=60c713cb032d351520ee1b18537262f5";
@@ -42,8 +45,8 @@ export const useFilter = (): [ IMovieArticleData[], (filterType: FilterTypes) =>
             const movies: IMovieArticleData[] = result.results.map( (movie: any): IMovieArticleData => (
                 {
                     title: movie.title,
-                    movieId: movie.id,
-                    posterSource: IMAGE_PRENT_URL+movie.poster_path,
+                    id: movie.id,
+                    posterSource: IMAGE_PARENT_URL+movie.poster_path,
                     isAdult: movie.adult
                 }
             ) );
@@ -75,8 +78,8 @@ export const useSearch = (): [ IMovieArticleData[], (searchTerm: string) => Prom
             const movies: IMovieArticleData[] = result.results.map( (movie: any): IMovieArticleData => (
                 {
                     title: movie.title,
-                    movieId: movie.id,
-                    posterSource: IMAGE_PRENT_URL+movie.poster_path,
+                    id: movie.id,
+                    posterSource: IMAGE_PARENT_URL+movie.poster_path,
                     isAdult: movie.adult
                 }
             ) );
@@ -94,28 +97,68 @@ export const useSearch = (): [ IMovieArticleData[], (searchTerm: string) => Prom
     ];
 };
 
-export const useFindActorById = () => {
-    const [ movie, setMovie ] = useState();
+export const useFindActorById = (defaultValue: IActorDetailsData): [ IActorDetailsData, (id: number) => Promise<void> ] => {
+    const [ actor, setActor ] = useState(defaultValue);
 
+    const setActorWithId = async(id: number) => {
+        let apiUrl = API_ORIGIN+`/person/${id}?${API_KEY}&append_to_response=movie_credits`;
+        try{
+            const response = await fetch( apiUrl );
+            const result = await response.json();
+
+            const localActor: IActorDetailsData = {
+                id: result.id,
+                name: result.name,
+                posterSource: IMAGE_PARENT_URL+result.profile_path,
+                biography: result.biography,
+                movies: result.movie_credits.cast.map( (movie: any): IMovieArticleData  => (
+                    {
+                        id: movie.id,
+                        title: movie.title,
+                        posterSource: IMAGE_PARENT_URL+movie.poster_path,
+                        isAdult: movie.adult
+                    }
+                ) )
+            };
+
+            setActor( localActor );
+        }
+        catch {
+            alert( "Couldn't fetch your movies" );
+        }
+    };
+
+    return [
+        actor,
+        setActorWithId
+    ];
 }
 
-export const useFindMovieById = (): [ IMovieDetailsData, (id: number) => Promise<void> ] => {
-    const [ movie, setMovie ] = useState({} as IMovieDetailsData);
+export const useFindMovieById = (defaultValue: IMovieDetailsData): [ IMovieDetailsData, (id: number) => Promise<void> ] => {
+    const [ movie, setMovie ] = useState(defaultValue);
 
     const setMovieWithId = async( id: number ) => {
-        let apiUrl = API_ORIGIN+`/movie/${id}?${API_KEY}`
+        let apiUrl = API_ORIGIN+`/movie/${id}?${API_KEY}&append_to_response=credits`
         try {
             const response = await fetch( apiUrl );
             const result = await response.json();
-            const movie: IMovieDetailsData = {
+            const localMovie: IMovieDetailsData = {
                     title: result.title,
-                    posterSource: IMAGE_PRENT_URL+result.poster_path,
+                    posterSource: IMAGE_PARENT_URL+result.poster_path,
                     isAdult: result.adult,
                     overview: result.overview,
                     rating: result.vote_average,
-                    status: result.status
+                    status: result.status,
+                    actors: result.credits.cast.map( (actor: any): IActorArticleData => (
+                        {
+                            id: actor.id,
+                            posterPath: IMAGE_PARENT_URL+actor.profile_path,
+                            name: actor.name,
+                            character: actor.character,
+                        }
+                    ) )
                 }
-            setMovie(movie);
+            setMovie(localMovie);
         }
         catch {
             alert( "Couldn't fetch your movies" );

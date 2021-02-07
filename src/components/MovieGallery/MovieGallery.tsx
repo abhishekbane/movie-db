@@ -7,19 +7,18 @@ import styles from './MovieGallery.module.css';
 
 interface IMovieGallery {
     movies: IMovieArticleData[];
-    onMovieSelected( movieId: number ): void;
+    onMovieSelected?( id: number ): void;
 }
 
 const MovieGallery = ( props: IMovieGallery ) => {
 
     const movieArticles = props.movies.map( ( movie, index ) => (
-        <Link key={ index } to={ "/movie/"+movie.movieId }>
+        <Link key={ index } to={ "/movie/"+movie.id }>
             <MovieArticle
-                movieId={ movie.movieId }
+                id={ movie.id }
                 title={ movie.title }
                 posterSource={ movie.posterSource }
                 isAdult={ movie.isAdult }
-                onClick = { props.onMovieSelected }
             /> 
         </Link>
     ));
