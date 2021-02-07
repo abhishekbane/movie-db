@@ -1,4 +1,5 @@
 .paragraph {
     margin: 0.25rem 0;
     color: var(--light-colour);
+    text-align: justify;
 }

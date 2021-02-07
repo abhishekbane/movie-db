@@ -15,18 +15,17 @@ export interface IActorArticleData {
 }
 
 interface IActorArticle extends IActorArticleData {
-    onClick( id: number ): void;
 }
 
-const ActorArticle = ( props: IActorArticleData ) => {
+const ActorArticle = ( props: IActorArticle ) => {
 
-    const name = props.name.length > 19 ? props.name.slice(0, 16)+"..." : props.name;
+    const name = props.name.length > 18 ? props.name.slice(0, 15)+"..." : props.name;
 
     let character="";
     if(props.character){
         const splitCharacter = props.character.split('(', 2);
         character = splitCharacter.length===2 ? `(${splitCharacter[1].trim()} ${splitCharacter[0].trim()}` : props.character;
-        character = character.length > 19 ? character.slice(0, 16)+"..." : character;
+        character = character.length > 18 ? character.slice(0, 15)+"..." : character;
     }
 
     return (

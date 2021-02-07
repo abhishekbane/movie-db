@@ -8,6 +8,7 @@ import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
 import styles from './MovieDetails.module.css';
 import SubSection from '../../components/UI/SubSection/SubSection';
 import ScrollableSection from '../../components/UI/ScrollableSection/ScrollableSection';
+import { isNullishCoalesce } from 'typescript';
 
 export interface IMovieDetailsData {
     posterSource: string;
@@ -16,6 +17,8 @@ export interface IMovieDetailsData {
     rating: string;
     isAdult: boolean;
     status: string;
+    releaseDate: string;
+    runtime: string;
     actors: IActorArticleData[];
 }
 
@@ -31,8 +34,10 @@ const MovieDetails = ( props: IMovieDetails ) => {
                 title={props.movie.title} 
                 posterSource={ props.movie.posterSource }
                 posterAlt={ props.movie.title } >
-                    <p className={ styles.paragraph }>{ props.movie.status }</p>
-                    <p  className={ styles.paragraph }>{ props.movie.rating }</p>
+                    <p className={ styles.paragraph }>Status: { props.movie.status }</p>
+                    { props.movie.releaseDate ? <p className={ styles.paragraph }>Release date: { props.movie.releaseDate }</p> : null }
+                    <p  className={ styles.paragraph }>Rating: { props.movie.rating }</p>
+                    <p  className={ styles.paragraph }>Runtime: { props.movie.runtime }m</p>
             </DetailsCard>
 
             <SubSection title="Synopsis">

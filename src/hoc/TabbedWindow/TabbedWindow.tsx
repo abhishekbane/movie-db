@@ -1,10 +1,6 @@
 import React from 'react';
 
-import SearchInput from '../../components/SearchInput/SearchInput';
-import Dropdown, { IDropdownOption } from '../../components/UI/Dropdown/Dropdown';
 import TabBar, { ITabBarOption } from '../../components/TabBar/TabBar';
-
-import { TrendingDuration } from '../../hooks/Fetch/Fetch';
 
 import styles from './TabbedWindow.module.css';
 

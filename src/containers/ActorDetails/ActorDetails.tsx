@@ -1,11 +1,11 @@
 import React from 'react';
 
 import MovieGallery from '../../components/MovieGallery/MovieGallery';
-
-import { IMovieArticleData } from '../../components/MovieArticle/MovieArticle';
 import DetailsCard from '../../components/DetailsCard/DetailsCard';
 import SubSection from '../../components/UI/SubSection/SubSection';
 import ScrollableSection from '../../components/UI/ScrollableSection/ScrollableSection';
+
+import { IMovieArticleData } from '../../components/MovieArticle/MovieArticle';
 
 import styles from './ActorDetails.module.css';
 

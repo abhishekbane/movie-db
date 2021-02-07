@@ -21,7 +21,7 @@ export interface IMovieArticle {
 
 const MovieArticle = ( props: IMovieArticle ) => {
 
-    const title = props.movie.title.length > 19 ? props.movie.title.slice(0, 16)+"..." : props.movie.title;
+    const title = props.movie.title.length > 18 ? props.movie.title.slice(0, 15)+"..." : props.movie.title;
 
     return (
         <OverviewArticle>

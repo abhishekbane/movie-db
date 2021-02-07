@@ -128,40 +128,6 @@ export const useFilter = () => {
 
 };
 
-export const useSearch = (): [ IMovieArticleData[], (searchTerm: string) => Promise<void> ] => {
-    const [ movies, setMovies ] = useState([] as IMovieArticleData[]);
-
-    const setMoviesBasedOnSearch = async( searchTerm: string ) => {
-        const validSearchTerm = searchTerm.split(" ").reduce( ( acc, current ) => (acc+"+"+current) );
-        console.log(validSearchTerm);
-        const apiUrl = API_ORIGIN + `/search/movie?${API_KEY}&query=${validSearchTerm}`;
-
-        try {
-            const response = await fetch( apiUrl );
-            const result: any = await response.json();
-            const movies: IMovieArticleData[] = result.results.map( (movie: any): IMovieArticleData => (
-                {
-                    title: movie.title,
-                    id: movie.id,
-                    posterSource: IMAGE_PARENT_URL+movie.poster_path,
-                    isAdult: movie.adult,
-                    rating: movie.vote_average
-                }
-            ) );
-            setMovies(movies);
-        }
-        catch {
-            alert( "Couldn't fetch your movies" );
-        }
-
-    };
-
-    return [
-        movies,
-        setMoviesBasedOnSearch
-    ];
-};
-
 export const useFindActorById = (defaultValue: IActorDetailsData): [ IActorDetailsData, (id: number) => Promise<void> ] => {
     const [ actor, setActor ] = useState(defaultValue);
 
@@ -217,12 +183,14 @@ export const useFindMovieById = (defaultValue: IMovieDetailsData): [ IMovieDetai
                     overview: result.overview,
                     rating: result.vote_average,
                     status: result.status,
+                    releaseDate: result.release_date,
+                    runtime: result.runtime,
                     actors: result.credits.cast.map( (actor: any): IActorArticleData => (
                         {
                             id: actor.id,
                             posterPath: IMAGE_PARENT_URL+actor.profile_path,
                             name: actor.name,
-                            character: actor.character,
+                            character: actor.character
                         }
                     ) )
                 }
