@@ -176,13 +176,15 @@ export const useFindActorById = (defaultValue: IActorDetailsData): [ IActorDetai
                 name: result.name,
                 posterSource: IMAGE_PARENT_URL+result.profile_path,
                 biography: result.biography,
+                placeOfBirth: result.place_of_birth,
+                birthdate: result.birthday,
                 movies: result.movie_credits.cast.map( (movie: any): IMovieArticleData  => (
                     {
                         id: movie.id,
                         title: movie.title,
                         posterSource: IMAGE_PARENT_URL+movie.poster_path,
                         isAdult: movie.adult,
-                        rating: movie.vote_average
+                        rating: movie.vote_average,
                     }
                 ) )
             };

@@ -1,0 +1,10 @@
+.section {
+    padding: 1rem;
+    background-color: var(--dark-colour);
+    text-align: left;
+    flex-grow: 1;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}

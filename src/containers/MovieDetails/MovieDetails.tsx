@@ -7,6 +7,7 @@ import { IActorArticleData } from '../../components/ActorArticle/ActorArticle';
 
 import styles from './MovieDetails.module.css';
 import SubSection from '../../components/UI/SubSection/SubSection';
+import ScrollableSection from '../../components/UI/ScrollableSection/ScrollableSection';
 
 export interface IMovieDetailsData {
     posterSource: string;
@@ -25,10 +26,11 @@ export interface IMovieDetails{
 const MovieDetails = ( props: IMovieDetails ) => {
 
     return (
-        <section className={ styles.section }>
+        <ScrollableSection>
             <DetailsCard 
                 title={props.movie.title} 
-                posterSource={ props.movie.posterSource } >
+                posterSource={ props.movie.posterSource }
+                posterAlt={ props.movie.title } >
                     <p className={ styles.paragraph }>{ props.movie.status }</p>
                     <p  className={ styles.paragraph }>{ props.movie.rating }</p>
             </DetailsCard>
@@ -40,7 +42,7 @@ const MovieDetails = ( props: IMovieDetails ) => {
             <SubSection title="Actors">
                 <ActorGallery actors={ props.movie.actors } />
             </SubSection>
-        </section>
+        </ScrollableSection>
     )
 };
 
