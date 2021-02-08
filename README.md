@@ -18,3 +18,11 @@
     
 ### Custom hooks
     The hooks are used to fetched filtered data or to search movies based on user keywords.
+
+### Theme
+css variables used for theme colours are,
+- --dark-colour: #292827; 
+- --semidark-colour: #3b3a39;
+- --light-colour: #edebe9;
+- --primary-colour: #0078d4;
+- --primary-colour-translucent: rgba( 0, 120, 212, 0.2 );
