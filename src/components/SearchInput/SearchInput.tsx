@@ -9,9 +9,17 @@ interface ISearchBoxProps {
 const SearchInput = ( props: ISearchBoxProps ) => {
     const [ searchTerm, setSearchTerm ] = useState("");
 
+    const onEnterPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            props.onSearch( searchTerm );
+        }
+    }
+
     return (
         <div className={ styles.searchInput }>
             <input 
+                onKeyDown={ onEnterPressed }
                 className={ styles.searchBox } 
                 type="text" 
                 value={ searchTerm } 
