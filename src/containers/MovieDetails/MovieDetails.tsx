@@ -36,7 +36,7 @@ const MovieDetails = ( props: IMovieDetails ) => {
                 posterAlt={ props.movie.title } >
                     <p className={ styles.paragraph }>Status: { props.movie.status }</p>
                     { props.movie.releaseDate ? <p className={ styles.paragraph }>Release date: { props.movie.releaseDate }</p> : null }
-                    <p  className={ styles.paragraph }>Rating: { props.movie.rating }</p>
+                    <p  className={ styles.paragraph }>Rating: { props.movie.rating }/10</p>
                     <p  className={ styles.paragraph }>Runtime: { props.movie.runtime }m</p>
             </DetailsCard>
 
