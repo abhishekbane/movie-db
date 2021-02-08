@@ -11,6 +11,6 @@ Wraps the ActorDetails/MovieDetailsPage component. This component takes actor/mo
 - It takes user input from TabbedWindow, like filter type of movies and user search query and uses custom hooks to fetch movies.
 - It also has its own pagination input to fetch multiple pages.
 
-#### The Layout component helps share common UI across pages
+##### The Layout component helps share common UI across pages
 - The Layout component has the Header component.
 - It wraps other components to share the header with them.
