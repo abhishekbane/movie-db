@@ -37,7 +37,6 @@ const TabbedWindow = ( props: ITabbedWindow ) => {
         <div className={ styles.tabbedWindow }>
             <TabBar defaultFilter={ props.defaultFilter } onTabSelect={ props.onTabSelect } allowSearch onSearch={ props.onSearch } options={ options } />
             { props.children }
-            
         </div>
     );
 };
