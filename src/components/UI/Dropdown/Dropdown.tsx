@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import styles from './Dropdown.module.css';
 
@@ -13,12 +13,20 @@ interface IDropdown {
     options: IDropdownOption[];
     name: string;
     id?: string;
+    deselect?: boolean;
     onChange( newValue: string ): void;
 }
 
 const Dropdown = ( props: IDropdown ) => {
 
     const [ selectedValue, setSelectedValue ] = useState( props.defaultValue );
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if( props.deselect ) {
+            (dropdownRef as any).current.selectedIndex="-1";
+        }
+    }, [  props.deselect ]);
 
     const options = props.options.map( ( option, index ) => ( 
         <option className={ styles.option } key={ index } value={ option.value } > { option.name } </option> 
@@ -29,10 +37,16 @@ const Dropdown = ( props: IDropdown ) => {
         props.onChange(event.target.value);
     }
 
+    if(dropdownRef.current){
+        console.log((dropdownRef as any).current.selectedIndex);
+        console.log((dropdownRef as any).current.value);
+    }
+
     return (
-        <select 
+        <select
+            ref={ dropdownRef } 
             className={ styles.dropdown }
-            value={ selectedValue } 
+            value={ props.deselect ? undefined : selectedValue } 
             onChange={ onChangeHandler } 
             name={ props.name } id={ props.id }>
             { options }

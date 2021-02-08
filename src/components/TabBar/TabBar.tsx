@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import SearchInput from '../SearchInput/SearchInput';
 
@@ -23,7 +23,6 @@ interface ITabBar {
 
 const TabBar = ( props: ITabBar ) => {
     const [ selectedTab, setSelectedTab ] = useState(props.defaultFilter as string);
-
     const onTabSelectedHandler = ( value: string ) => {
         props.onTabSelect( value );
         setSelectedTab(value);
@@ -49,6 +48,7 @@ const TabBar = ( props: ITabBar ) => {
     });
 
     const searchInput = props.allowSearch ? <SearchInput onSearch={ onSearchHandler } /> : null
+    
     const searchSelectedClass = selectedTab==="" ? styles.tabSelected : "";
     const searchContainerClasses = `${styles.inputContainer} ${searchSelectedClass}`;
 
@@ -62,6 +62,7 @@ const TabBar = ( props: ITabBar ) => {
             </div>
             <div className={ dropdownTabClasses }>
                 <Dropdown 
+                    deselect={ selectedTab==="" }
                     defaultValue={ props.defaultFilter } 
                     options={ props.options } 
                     name="filterDropdown" 
