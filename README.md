@@ -6,6 +6,8 @@ use the following steps,
 3. npm install
 4. npm start
 
+You can also access the hosted web app [here]( https://abhishekbane.github.io/moviedb/ )
+
 ### The web app project is divided into two major chunks
 - Web app UI
 - Custom Hooks
