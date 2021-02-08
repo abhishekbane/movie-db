@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import OverviewArticle from '../UI/OverviewArticle/OverviewArticle';
 import Poster from '../UI/Poster/Poster';
-import RouterLink from '../UI/RouterLink/RouterLink';
+import RouterLink, { PathName } from '../UI/RouterLink/RouterLink';
 
 import styles from './ActorArticle.module.css';
 
@@ -30,7 +29,7 @@ const ActorArticle = ( props: IActorArticle ) => {
 
     return (
         <OverviewArticle>
-            <RouterLink to={"/actor/"+props.id}>
+            <RouterLink to={ `/${PathName.actor}/${props.id}` }>
                 <Poster src={ props.posterPath } alt={ props.name } />
                 <div className={ styles.details }>
                     <h3 className={ styles.title }>{ name }</h3>

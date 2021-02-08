@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import OverviewArticle from '../UI/OverviewArticle/OverviewArticle';
 import Poster from '../UI/Poster/Poster';
-import RouterLink from '../UI/RouterLink/RouterLink';
+import RouterLink, { PathName } from '../UI/RouterLink/RouterLink';
 
 import styles from './MovieArticle.module.css';
 
@@ -25,7 +25,7 @@ const MovieArticle = ( props: IMovieArticle ) => {
 
     return (
         <OverviewArticle>
-            <RouterLink to={ "/movie/"+props.movie.id }>
+            <RouterLink to={ `/${PathName.movie}/${props.movie.id}` } >
                 <Poster alt={ props.movie.title } src={ props.movie.posterSource }/>
                 <div className={ styles.details }>
                     <h3 className={ styles.title }>{ title }</h3>

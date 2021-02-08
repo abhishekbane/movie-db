@@ -11,7 +11,7 @@ const Header: React.FunctionComponent<IHeader> = ( props: IHeader ) => {
 
     return (
         <header className={ styles.header }>
-            <Link className={ styles.link } to="/">
+            <Link className={ styles.link } to={`${process.env.PUBLIC_URL}`}>
                 <h1> { props.title } </h1>
             </Link>
         </header>

@@ -7,7 +7,7 @@ import MovieDetailsPage from './containers/MovieDetails/MovieDetailsPage';
 import ActorDetailsPage from './containers/ActorDetails/ActorDetailsPage';
 
 import './App.css';
-import { FilterTypes } from './hoc/TabbedWindow/TabbedWindow';
+import { PathName } from './components/UI/RouterLink/RouterLink';
 
 function App() {
 
@@ -15,9 +15,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Layout>
-          <Route path="/" exact component={ MovieExplorer }/>
-          <Route path="/movie/:id" component={ MovieDetailsPage } />
-          <Route path="/actor/:id" component={ ActorDetailsPage } />
+          <Route path={`${process.env.PUBLIC_URL}/`} exact component={ MovieExplorer }/>
+          <Route path={`${process.env.PUBLIC_URL}/${PathName.movie}/:id`} component={ MovieDetailsPage } />
+          <Route path={`${process.env.PUBLIC_URL}/${PathName.actor}/:id`} component={ ActorDetailsPage } />
         </Layout>
       </BrowserRouter>
     </div>
