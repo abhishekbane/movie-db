@@ -1,4 +1,11 @@
 # Movie-DB
+To run this locally,
+use the following steps,
+1. git clone https://github.com/abhishekbane/movie-db.git
+2. cd movie-db
+3. npm install
+4. npm start
+
 ### The web app project is divided into two major chunks
 - Web app UI
 - Custom Hooks
