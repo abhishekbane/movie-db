@@ -13,8 +13,8 @@
 - containers ( more on containers [here](https://github.com/abhishekbane/movie-db/tree/main/src/containers) )
 - hoc ( more on hoc [here](https://github.com/abhishekbane/movie-db/tree/main/src/hoc) )
 ### Custom hooks
-    The hooks are used to fetch filtered data or to search movies based on user keywords. 
-    ( more on hooks [here](https://github.com/abhishekbane/movie-db/tree/main/src/hooks) ).
+The hooks are used to fetch filtered data or to search movies based on user keywords. 
+( more on hooks [here](https://github.com/abhishekbane/movie-db/tree/main/src/hooks) ).
 ### Theme
 css variables used for theme colours are,
 - --dark-colour: #292827; 
